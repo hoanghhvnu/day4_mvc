@@ -1,0 +1,28 @@
+<table border='1'>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    <?php
+        foreach($data as $listUs){
+            /*echo "<pre>";
+            print_r($data);*/
+            // $data variable send from loadView in My_Controller
+            echo "<tr>";
+            echo "<td>".$listUs['username']."</td>";
+            echo "<td>".$listUs['email']."</td>";
+            echo "<td>".$listUs['address']."</td>";
+            echo "<td>".$listUs['phone']."</td>";
+            echo "<td>".$listUs['gender']."</td>";
+            echo "<td><a href='index.php?module=admin&controller=user&action=delete&id=".$listUs['id']."'>Delete</a></td>";
+            echo "<td><a href='index.php?module=admin&controller=user&action=update&id=".$listUs['id']."'>Edit</a></td>";
+            echo "</tr>";
+        }
+    ?>
+</table>
+<a href="index.php?module=admin&controller=user&action=insert">Insert User</a>
