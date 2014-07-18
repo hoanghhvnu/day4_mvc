@@ -1,0 +1,11 @@
+RewriteEngine On
+
+
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z]+)$ /day4/day4_mvc/index.php?module=$1&controller=$2&action=$3 [L]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z]+)/([0-9]+)$ /day4/day4_mvc/index.php?module=$1&controller=$2&action=$3&id=$4 [L]
+
+
+
+
+
+

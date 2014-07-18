@@ -12,6 +12,17 @@ class user_model extends MY_Model
         $this->setWhere("id = $id");
         return $this->getOnce($this->_table);
     }
+
+    public function getSeri($limit, $start){
+        $this->setLimit($limit,$start);
+        return $this->getAll($this->_table);
+    } // end getSeri()
+
+    public function getTotalRecord(){
+        // $result = $this->getAll();
+        $data = $this->count_all($this->_table);
+        return $data;
+    } // end getTotal
     public function insertUser($data)
     {
         $this->insert($this->_table,$data);

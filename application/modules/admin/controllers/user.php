@@ -4,16 +4,38 @@ class user extends MY_Controller
     protected $_error = array();
     public function __construct()
     {
+       // parent::__construct();
        $this->loadModel("user_model");
+       $this->loadLibrary("pagination");
     }
     public function index()
     {
-        $data = $this->model->listUser();
+        $this->listuser();
+    }
+
+    public function listuser()
+    {
+        // $data = $this->model->listUser();
+        $page = isset($_GET['id']) ? $_GET['id'] : 1;
+        $per_page = 2;
+        $total = $this->model->getTotalRecord();
+        $base = $this->baseurl("/admin/user/listuser");
+
+        $this->library->setPer_page($per_page);
+        $this->library->setBaseurl($base);
+        $this->library->setTotal($total);
+        // echo "total: " . $total;
+        $data['link'] = $this->library->createLink();
+
+        $start = ($page - 1) * $per_page;
+        $data['listUser'] = $this->model->getSeri($per_page,$start);
+        // print_r($data);
         /*$data['listUser'] = $this->model->listUser();
         echo "<pre>";
         print_r($data);*/
         $this->loadView("user/listuser",$data);
     }
+
     public function insert()
     {
         $params = $_REQUEST;
@@ -29,8 +51,12 @@ class user extends MY_Controller
                                 "phone"=>$params['txtphone'],
                                 "gender"=>$params['gender']
                               );
+                // echo $userInsert;
                 $this->model->insertUser($userInsert);
-                header("location:index.php?module=admin&controller=user&action=index");
+                // header("location:index.php?module=admin&controller=user&action=index");
+                // echo $this->baseurl("/admin/user/index");
+                // header("location:/admin/user/index");
+                $this->redirect($this->baseurl("/admin/user/index"));
             }
         }      
         
@@ -44,7 +70,9 @@ class user extends MY_Controller
     {
         $id = $_GET['id'];
         $this->model->deleteUser($id);
-        header("location:index.php?module=admin&controller=user&action=index");
+        // header("location:index.php?module=admin&controller=user&action=index");
+        // header("location:/admin/user/index");
+        $this->redirect($this->baseurl("/admin/user/index"));
     }
 
     public function update(){
@@ -62,7 +90,8 @@ class user extends MY_Controller
                 // echo "mang userUpdate <pre>";
                 // print_r($userUpdate);
                 $this->model->updateUser($userUpdate,$id);
-                header("location:index.php?module=admin&controller=user&action=index");
+                // header("location:index.php?module=admin&controller=user&action=index");
+                $this->redirect($this->baseurl("/admin/user/index"));
             }
         }      
         

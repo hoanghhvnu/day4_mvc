@@ -5,11 +5,13 @@
         <th>Address</th>
         <th>Phone</th>
         <th>Gender</th>
-        <th>Delete</th>
+        
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <?php
-        foreach($data as $listUs){
+        echo "Trang: " . $link;
+        foreach($listUser as $listUs){
             /*echo "<pre>";
             print_r($data);*/
             // $data variable send from loadView in My_Controller
@@ -19,10 +21,15 @@
             echo "<td>".$listUs['address']."</td>";
             echo "<td>".$listUs['phone']."</td>";
             echo "<td>".$listUs['gender']."</td>";
-            echo "<td><a href='index.php?module=admin&controller=user&action=delete&id=".$listUs['id']."'>Delete</a></td>";
-            echo "<td><a href='index.php?module=admin&controller=user&action=update&id=".$listUs['id']."'>Edit</a></td>";
+            // echo "<td><a href='index.php?module=admin&controller=user&action=delete&id=".$listUs['id']."'>Delete</a></td>";
+            // echo "<td><a href='index.php?module=admin&controller=user&action=update&id=".$listUs['id']."'>Edit</a></td>";
+            echo "<td><a href='" . $this->baseurl("/admin/user/update/") . $listUs['id']. "'>Edit</a></td>";
+            echo "<td><a href='" . $this->baseurl("/admin/user/delete/") . $listUs['id']. "'>Delete</a></td>";
+            // echo "<td><a href='admin/user/delete/{$listUs['id']}'>Delete</a></td>";
+
             echo "</tr>";
         }
     ?>
 </table>
-<a href="index.php?module=admin&controller=user&action=insert">Insert User</a>
+<!-- <a href="index.php?module=admin&controller=user&action=insert">Insert User</a> -->
+<a href="http://localhost/day4/day4_mvc/admin/user/insert">Insert User</a>

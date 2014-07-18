@@ -8,6 +8,8 @@ class load
         $controller = isset($_REQUEST['module'])  && $_REQUEST['controller'] != null ? $_REQUEST['controller'] : "user";
         $action = isset($_REQUEST['action'])  && $_REQUEST['action'] != null ? $_REQUEST['action'] : "index";
         $url = "application/modules/$module/controllers/$controller";
+        // echo $url;
+        // echo $action;
         require("$url.php");
         // echo "load() function is call";
         $obj = new $controller;

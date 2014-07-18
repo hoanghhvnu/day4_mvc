@@ -58,8 +58,18 @@ class MY_Model extends database
             return false;
         }
         $sql = "SELECT {$this->getSelect()} FROM $table {$this->getWhere()} {$this->getOrder()} {$this->getLimit()}";
+        // echo $sql;
         $this->query($sql);
         return $this->fetchAll();
+    }
+   
+    public function count_all($table){
+        $sql = "SELECT * FROM $table" ;
+        // echo $sql;
+        $this->query($sql);
+        // echo $result;
+        // $data = mysql_num_rows($result);
+        return $this->numRows();
     }
 
     public function getOnce($table = "")
@@ -83,6 +93,7 @@ class MY_Model extends database
         $stringColumn = implode(",",$columnArr);
         $stringValue = implode(",",$valueArr);
         $sql = "INSERT INTO $table_name($stringColumn) VALUES($stringValue)";
+        // echo $sql;
         $this->query($sql);
     }
     public function delete($table_name)
